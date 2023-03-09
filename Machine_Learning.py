@@ -34,7 +34,9 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_
 from xgboost import XGBClassifier
 from sklearn.metrics import accuracy_score
 
-modelx = XGBClassifier(base_score=0.5, use_label_encoder=True, eval_metric='mlogloss')
+modelx = XGBClassifier(use_label_encoder=True, eval_metric='mlogloss',n_estimators = 2500, \
+                max_depth = 19,  learning_rate = 0.02,subsample = .5, colsample_bytree = 0.4, \
+                       colsample_bylevel = 0.4, gamma = 1 , random_state = 0)
 
 modelx.fit(x_train, y_train)
 
