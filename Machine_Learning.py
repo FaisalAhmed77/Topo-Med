@@ -88,3 +88,28 @@ plt.grid(False)
 from sklearn.metrics import classification_report
 
 print(classification_report(y_test, predictions, digits=4))
+
+
+#  MLP Code
+
+# define network architecture
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import InputLayer
+from tensorflow.keras.layers import Dense
+import keras
+
+MLP = Sequential()
+MLP.add(InputLayer(input_shape=(200, ))) # input layer
+MLP.add(Dense(256, activation='relu')) # hidden layer 1
+MLP.add(Dense(256, activation='relu')) # hidden layer 2
+MLP.add(Dense(4, activation='softmax')) # output layer
+
+# summary
+MLP.summary()
+loss = keras.losses.categorical_crossentropy
+MLP.compile(loss=loss, optimizer='adam', metrics=['accuracy'])
+MLP.fit(x_train, y_train, batch_size= 32, epochs=100, shuffle=True, verbose=0)
+score = MLP.evaluate(x_test, y_test, verbose=0)
+print('loss=', score[0])
+print('accuracy=', score[1])
+
